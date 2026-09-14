@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#18a817"/>
+  <text x="256" y="225" text-anchor="middle" font-family="sans-serif" font-size="190" font-weight="700" fill="white">萬</text>
+  <path d="M150 337h212M256 290v94" stroke="white" stroke-width="34" stroke-linecap="round"/>
+</svg>

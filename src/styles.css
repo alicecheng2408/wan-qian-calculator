@@ -1,0 +1,79 @@
+:root {
+  font-family: Inter, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  color: #343638;
+  background: #e9ebed;
+  font-synthesis: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { min-height: 100%; margin: 0; }
+body { min-width: 320px; overscroll-behavior: none; }
+button, input { font: inherit; }
+button { touch-action: manipulation; }
+
+.calculator {
+  width: min(100%, 500px);
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: max(20px, env(safe-area-inset-top)) 18px max(18px, env(safe-area-inset-bottom));
+  background: #f6f7f8;
+  display: grid;
+  grid-template-rows: minmax(220px, 1fr) auto;
+  gap: 12px;
+  box-shadow: 0 0 50px rgb(0 0 0 / 8%);
+}
+
+.display { min-width: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 10px 4px 2px; }
+.eyebrow { color: #777b7e; font-size: .78rem; font-weight: 700; letter-spacing: .08em; }
+.expression {
+  width: 100%; min-height: 58px; border: 0; outline: 0; border-bottom: 1px solid #dfe2e3;
+  background: transparent; color: #353739; text-align: right; white-space: nowrap;
+  font-size: clamp(1.35rem, 7vw, 2rem); caret-color: #18a817; padding: 8px 2px;
+}
+.expression:focus { border-bottom-color: #77be73; }
+.expression::placeholder { color: #a5a8aa; font-size: 1rem; }
+.answer { display: flex; min-height: 70px; align-items: flex-end; justify-content: space-between; gap: 12px; padding: 9px 2px 2px; }
+.answer-label { color: #85898b; font-size: .78rem; white-space: nowrap; padding-bottom: 8px; }
+.answer output { overflow-x: auto; color: #4c4f51; font-size: clamp(1.75rem, 9vw, 2.7rem); font-weight: 650; text-align: right; white-space: nowrap; scrollbar-width: none; }
+.answer.is-result output { color: #149613; }
+.status { min-height: 20px; margin: 0; color: #727679; font-size: .78rem; text-align: right; }
+.status.is-error { color: #b3261e; font-weight: 650; }
+
+.controls { border-top: 1px solid #e0e2e3; padding-top: 10px; }
+.suggestion { height: 0; overflow: hidden; opacity: 0; transition: height .2s, opacity .2s; }
+.suggestion.is-visible {
+  height: 66px; opacity: 1; background: #eaf6e9; border: 1px solid #b9ddb7; border-radius: 14px;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 10px; margin-bottom: 8px;
+}
+.suggestion p { margin: 0; color: #275726; font-size: .82rem; line-height: 1.35; }
+.suggestion div { display: flex; gap: 3px; flex-shrink: 0; }
+.suggestion button { min-height: 44px; border: 0; border-radius: 10px; padding: 0 10px; background: transparent; color: #555; font-weight: 700; }
+.suggestion .apply { color: #137b12; background: #d8edd6; }
+.unit-row { height: 54px; display: grid; grid-template-columns: 1fr 90px 90px; gap: 8px; align-items: center; margin-bottom: 10px; }
+.unit-row span { color: #7b7f81; font-size: .78rem; }
+.unit-row button { height: 48px; border: 1px solid #c8dec6; border-radius: 16px; background: #eef8ed; color: #187e17; font-size: 1.25rem; font-weight: 750; }
+.unit-row small { display: block; font-size: .56rem; font-weight: 600; opacity: .74; }
+.keypad { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(7px, 2.4vw, 12px); }
+.key { aspect-ratio: 1.15; min-height: 54px; border: 0; border-radius: 50%; background: #fff; color: #3e4143; font-size: clamp(1.55rem, 7vw, 2.35rem); box-shadow: 0 1px 0 rgb(0 0 0 / 3%); }
+.key:active, .unit-row button:active { transform: scale(.95); filter: brightness(.96); }
+.key.function { background: #e5e7e8; font-size: clamp(1.25rem, 6vw, 2rem); }
+.key.operator { background: #818486; color: white; }
+.key.equals { background: #18a817; color: white; }
+.key:focus-visible, .unit-row button:focus-visible, .suggestion button:focus-visible { outline: 3px solid #126dca; outline-offset: 2px; }
+
+@media (max-height: 700px) {
+  .calculator { grid-template-rows: minmax(150px, 1fr) auto; gap: 4px; padding-top: max(8px, env(safe-area-inset-top)); }
+  .answer { min-height: 52px; }
+  .key { min-height: 46px; aspect-ratio: 1.45; border-radius: 24px; }
+  .unit-row { height: 48px; margin-bottom: 5px; }
+  .unit-row button { height: 44px; }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+  .calculator { max-width: 850px; grid-template-columns: minmax(260px, .9fr) 1.1fr; grid-template-rows: 1fr; align-items: end; }
+  .display { align-self: stretch; }
+  .key { aspect-ratio: 2.1; min-height: 42px; }
+}
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
